@@ -1,10 +1,26 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Environment, useGLTF, ContactShadows } from '@react-three/drei';
+import { OrbitControls, Float, Environment, useGLTF } from '@react-three/drei';
 import { motion } from 'framer-motion';
+import * as THREE from 'three';
 
 function Model() {
   const { scene } = useGLTF('/main-model.glb');
+
+  // This forces ANY model to look like premium, highly-reflective dark metal
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color: '#111111',      // Dark base color
+          metalness: 0.9,        // Makes it highly metallic
+          roughness: 0.1,        // Makes it glossy and reflective
+          envMapIntensity: 2.0   // Makes it reflect the environment beautifully
+        });
+      }
+    });
+  }, [scene]);
+
   return (
     <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
       <primitive object={scene} scale={2} position={[2, 0, 0]} />
@@ -21,14 +37,20 @@ export default function App() {
   return (
     <>
       <div className="canvas-container">
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-          <ambientLight intensity={0.4} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#4facfe" />
+        {/* dpr={[1, 1.5]} limits pixel density to instantly stop mobile lag */}
+        <Canvas camera={{ position: [0, 0, 8], fov: 50 }} dpr={[1, 1.5]}>
+          <ambientLight intensity={0.5} />
+          {/* Blue spotlight to reflect off the dark metal model */}
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={5} color="#4facfe" />
+          <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={2} color="#00f2fe" />
+          
           <Environment preset="city" />
+          
           <Suspense fallback={null}>
             <Model />
-            <ContactShadows position={[0, -2, 0]} opacity={0.5} scale={10} blur={2} far={4} />
+            {/* ContactShadows REMOVED for maximum mobile performance */}
           </Suspense>
+          
           <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
         </Canvas>
       </div>
@@ -59,12 +81,10 @@ export default function App() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <h2 className="section-title">Ready to Grow?</h2>
             <p className="hero-subtitle" style={{ margin: '0 auto 2.5rem auto' }}>Let's discuss how omnix.growth can transform your business.</p>
-            {/* Replace the X's with your actual phone number */}
-            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Omnix!" className="btn btn-primary" target="_blank">Message Us on WhatsApp</a>
+            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Omnix!" className="btn btn-primary" target="_blank" rel="noreferrer">Message Us on WhatsApp</a>
           </motion.div>
         </section>
       </div>
     </>
   );
 }
-
