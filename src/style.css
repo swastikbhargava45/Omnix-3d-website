@@ -25,14 +25,14 @@ body {
   z-index: -2; 
 }
 
-/* Dark transparent overlay */
+/* Dark transparent overlay to make text pop */
 .bg-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, rgba(3, 3, 5, 0.75), rgba(3, 3, 5, 0.95));
+  background: linear-gradient(to bottom, rgba(3, 3, 5, 0.5), rgba(3, 3, 5, 0.95));
   z-index: -1;
 }
 
@@ -86,7 +86,7 @@ nav {
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: #a0a0a0;
+  color: #e0e0e0;
   max-width: 600px;
   margin-bottom: 2.5rem;
 }
@@ -106,7 +106,6 @@ nav {
   font-weight: 600;
 }
 
-/* Reusable Grid for all sections */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -114,8 +113,8 @@ nav {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   padding: 2.5rem;
   border-radius: 16px;
