@@ -9,9 +9,11 @@ export default function App() {
 
   return (
     <>
+      {/* Background Image Setup */}
       <div className="bg-image-container"></div>
       <div className="bg-overlay"></div>
 
+      {/* Main Website Content */}
       <div className="content-wrapper">
         <nav>
           <div className="logo">Omnix.growth</div>
@@ -152,7 +154,6 @@ export default function App() {
             <p className="hero-subtitle" style={{ margin: '0 auto 2.5rem auto' }}>
               Your competition is already adapting to AI. Don't get left behind. Secure your local market and scale your business today.
             </p>
-            {/* Replace the X's with your WhatsApp Number */}
             <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Omnix,%20I%20am%20ready%20to%20scale%20my%20business!" 
                className="btn btn-primary" target="_blank" rel="noreferrer">
               Message Us on WhatsApp
