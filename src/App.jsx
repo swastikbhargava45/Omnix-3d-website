@@ -1,89 +1,165 @@
-import React, { Suspense, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Environment, useGLTF } from '@react-three/drei';
+import React from 'react';
 import { motion } from 'framer-motion';
-import * as THREE from 'three';
-
-function Model() {
-  const { scene } = useGLTF('/main-model.glb');
-
-  // This forces ANY model to look like premium, highly-reflective dark metal
-  useEffect(() => {
-    scene.traverse((child) => {
-      if (child.isMesh) {
-        child.material = new THREE.MeshStandardMaterial({
-          color: '#111111',      // Dark base color
-          metalness: 0.9,        // Makes it highly metallic
-          roughness: 0.1,        // Makes it glossy and reflective
-          envMapIntensity: 2.0   // Makes it reflect the environment beautifully
-        });
-      }
-    });
-  }, [scene]);
-
-  return (
-    <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
-      <primitive object={scene} scale={2} position={[2, 0, 0]} />
-    </Float>
-  );
-}
 
 export default function App() {
   const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
   };
 
   return (
     <>
-      <div className="canvas-container">
-        {/* dpr={[1, 1.5]} limits pixel density to instantly stop mobile lag */}
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }} dpr={[1, 1.5]}>
-          <ambientLight intensity={0.5} />
-          {/* Blue spotlight to reflect off the dark metal model */}
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={5} color="#4facfe" />
-          <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={2} color="#00f2fe" />
-          
-          <Environment preset="city" />
-          
-          <Suspense fallback={null}>
-            <Model />
-            {/* ContactShadows REMOVED for maximum mobile performance */}
-          </Suspense>
-          
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-        </Canvas>
-      </div>
+      <div className="bg-image-container"></div>
+      <div className="bg-overlay"></div>
 
       <div className="content-wrapper">
-        <nav><div className="logo">omnix.growth</div></nav>
+        <nav>
+          <div className="logo">Omnix.growth</div>
+        </nav>
 
+        {/* HERO SECTION */}
         <section id="home">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <h1 className="hero-title">Dominate Your<br/>Digital Space.</h1>
-            <p className="hero-subtitle">We design, build, and market digital experiences that turn visitors into paying customers.</p>
-            <a href="#contact" className="btn btn-primary">Start Scaling Today</a>
+            <h1 className="hero-title">Stop Chasing Followers.<br/>Start Getting Customers.</h1>
+            <p className="hero-subtitle">
+              We transform local businesses into booking machines using AI-driven ads, smart automation, and modern websites. 
+            </p>
+            <a href="#contact" className="btn btn-primary">Get More Customers</a>
           </motion.div>
         </section>
 
+        {/* ABOUT SECTION */}
+        <section id="about">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+            <h2 className="section-title">We Don't Just Market. We Scale.</h2>
+            <p className="section-subtitle">What is Omnix?</p>
+            <p className="hero-subtitle" style={{ maxWidth: "800px" }}>
+              Omnix is a next-generation growth agency built for modern businesses. We don't care about vanity metrics. We care about foot traffic, booked appointments, and revenue. Powered by AI and designed for speed, we automate your lead generation so you can focus on running your business.
+            </p>
+          </motion.div>
+        </section>
+
+        {/* SERVICES SECTION */}
         <section id="services">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-            <h2 className="section-title">Our Expertise</h2>
-            <div className="services-grid">
-              <div className="service-card"><h3>High-End Web Dev</h3><p>Lightning-fast platforms tailored for modern businesses.</p></div>
-              <div className="service-card"><h3>SEO & Visibility</h3><p>Rank higher when local customers search for your services.</p></div>
-              <div className="service-card"><h3>Digital Advertising</h3><p>Data-driven ad campaigns designed to drive foot traffic.</p></div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={fadeUp}>
+            <h2 className="section-title">Growth Systems</h2>
+            <p className="section-subtitle">Our Expertise</p>
+            
+            <div className="grid-container">
+              <div className="card">
+                <h3>Instagram Growth</h3>
+                <p>We create reels and content strategies that actually drive local foot traffic, not just empty views.</p>
+                <div className="highlight">Result: Attention turns into real sales.</div>
+              </div>
+              <div className="card">
+                <h3>AI & Paid Ads</h3>
+                <p>Hyper-targeted Facebook and Instagram ads powered by AI to outsmart your local competition.</p>
+                <div className="highlight">Result: Lower ad costs, higher ROI.</div>
+              </div>
+              <div className="card">
+                <h3>WhatsApp Automation</h3>
+                <p>Instant auto-replies, smart follow-ups, and seamless booking flows sent straight to their DMs.</p>
+                <div className="highlight">Result: 24/7 conversion on autopilot.</div>
+              </div>
+              <div className="card">
+                <h3>Website Development</h3>
+                <p>Fast, premium, modern websites tailored for cafes, gyms, and local brands.</p>
+                <div className="highlight">Result: A digital storefront that builds trust instantly.</div>
+              </div>
             </div>
           </motion.div>
         </section>
 
-        <section id="contact" style={{ textAlign: 'center' }}>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="section-title">Ready to Grow?</h2>
-            <p className="hero-subtitle" style={{ margin: '0 auto 2.5rem auto' }}>Let's discuss how omnix.growth can transform your business.</p>
-            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Omnix!" className="btn btn-primary" target="_blank" rel="noreferrer">Message Us on WhatsApp</a>
+        {/* WHY CHOOSE US */}
+        <section id="why-us">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+            <h2 className="section-title">The Omnix Advantage</h2>
+            <p className="section-subtitle">Why Choose Us</p>
+            <div className="grid-container">
+              <div className="card">
+                <h3>✓ AI-Powered Precision</h3>
+                <p>We use next-level AI to find your ideal customers faster and cheaper than traditional agencies.</p>
+              </div>
+              <div className="card">
+                <h3>✓ Local Business Experts</h3>
+                <p>We understand the unique challenges of gyms, cafes, and local stores. We know what gets people in the door.</p>
+              </div>
+              <div className="card">
+                <h3>✓ Done-For-You Automation</h3>
+                <p>You run the business. We run the systems that bring the customers to you.</p>
+              </div>
+              <div className="card">
+                <h3>✓ Results, Not Vanity</h3>
+                <p>Likes don't pay the bills. We strictly focus on strategies that generate direct revenue.</p>
+              </div>
+            </div>
           </motion.div>
         </section>
+
+        {/* PROCESS SECTION */}
+        <section id="process">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+            <h2 className="section-title">How It Works</h2>
+            <p className="section-subtitle">Our 4-Step Formula</p>
+            <div className="grid-container">
+              <div className="card">
+                <div className="step-number">01</div>
+                <h3>Audit & Discover</h3>
+                <p>We analyze your current presence and find exactly where you are losing potential customers.</p>
+              </div>
+              <div className="card">
+                <div className="step-number">02</div>
+                <h3>AI Strategy</h3>
+                <p>We build a custom roadmap using modern ad structures and content systems.</p>
+              </div>
+              <div className="card">
+                <div className="step-number">03</div>
+                <h3>Execution</h3>
+                <p>We launch the ads, build the site, and turn on the WhatsApp automation.</p>
+              </div>
+              <div className="card">
+                <div className="step-number">04</div>
+                <h3>Scale & Profit</h3>
+                <p>We monitor the data, optimize the AI, and scale your daily revenue.</p>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* RESULTS / PROOF SECTION */}
+        <section id="results">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+            <h2 className="section-title">Proven Impact</h2>
+            <p className="section-subtitle">Real Results</p>
+            <div className="grid-container">
+              <div className="card" style={{ borderColor: '#4facfe', background: 'rgba(79, 172, 254, 0.05)' }}>
+                <h3>"Doubled foot traffic for a local cafe in just 30 days."</h3>
+              </div>
+              <div className="card" style={{ borderColor: '#4facfe', background: 'rgba(79, 172, 254, 0.05)' }}>
+                <h3>"Generated 50+ qualified gym memberships in week one."</h3>
+              </div>
+              <div className="card" style={{ borderColor: '#4facfe', background: 'rgba(79, 172, 254, 0.05)' }}>
+                <h3>"Automated 90% of customer replies for a busy local salon."</h3>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* CTA SECTION */}
+        <section id="contact" style={{ textAlign: 'center', alignItems: 'center' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+            <h2 className="section-title" style={{ fontSize: '4rem' }}>Ready to Dominate?</h2>
+            <p className="hero-subtitle" style={{ margin: '0 auto 2.5rem auto' }}>
+              Your competition is already adapting to AI. Don't get left behind. Secure your local market and scale your business today.
+            </p>
+            {/* Replace the X's with your WhatsApp Number */}
+            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Omnix,%20I%20am%20ready%20to%20scale%20my%20business!" 
+               className="btn btn-primary" target="_blank" rel="noreferrer">
+              Message Us on WhatsApp
+            </a>
+          </motion.div>
+        </section>
+
       </div>
     </>
   );
