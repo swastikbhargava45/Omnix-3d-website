@@ -1,15 +1,19 @@
+/* Import World-Class Typography */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
-  background-color: #0b0b0d; /* Premium charcoal dark */
+  background-color: #0b0b0d;
   color: #ffffff;
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Makes text look sharper on Mac/iPhones */
 }
 
 /* Background Image setup */
@@ -31,7 +35,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, rgba(11, 11, 13, 0.7), rgba(11, 11, 13, 0.98));
+  background: linear-gradient(to bottom, rgba(11, 11, 13, 0.8), rgba(11, 11, 13, 0.98));
   z-index: -1;
 }
 
@@ -39,7 +43,7 @@ body {
 .content-wrapper { position: relative; z-index: 1; }
 section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 10%; }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR & LOGO --- */
 .navbar {
   position: fixed;
   top: 0;
@@ -49,28 +53,36 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: rgba(11, 11, 13, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(11, 11, 13, 0.6);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .logo-container {
-  height: 35px;
   display: flex;
   align-items: center;
+  gap: 0.75rem; /* Perfect spacing between image and text */
+  height: 38px;
+  text-decoration: none;
 }
 
 .nav-logo {
   height: 100%;
   width: auto;
   object-fit: contain;
-  transition: opacity 0.3s ease;
-  border-radius: 4px; /* Slight rounding looks premium */
+  border-radius: 6px; 
 }
 
-.nav-logo:hover { opacity: 0.8; }
+.logo-text { 
+  font-weight: 800; 
+  font-size: 1.4rem; 
+  letter-spacing: -0.5px; /* Tight letter spacing looks premium */
+  color: #ffffff;
+}
 
-.logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; }
+.text-accent {
+  color: #4facfe; /* Neon blue for the .growth part */
+}
 
 .hamburger {
   background: none;
@@ -90,7 +102,8 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #0b0b0d;
+  background: rgba(11, 11, 13, 0.98);
+  backdrop-filter: blur(20px);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -109,14 +122,11 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   cursor: pointer;
 }
 
-.menu-links {
-  list-style: none;
-  text-align: center;
-}
-
+.menu-links { list-style: none; text-align: center; }
 .menu-links li {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin: 1.5rem 0;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -126,27 +136,30 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
 
 .menu-highlight {
   color: #4facfe;
-  border: 1px solid #4facfe;
+  border: 1px solid rgba(79, 172, 254, 0.3);
   padding: 0.5rem 1.5rem;
   border-radius: 8px;
+  background: rgba(79, 172, 254, 0.05);
 }
 
 /* --- HERO SECTION --- */
 .hero { text-align: center; align-items: center; }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
+  letter-spacing: -1.5px; /* The secret to high-end startup typography */
   margin-bottom: 1.5rem;
   max-width: 900px;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  color: #a0a0a0;
+  font-size: 1.25rem;
+  color: #a0aab8; /* Softer, premium gray */
   max-width: 600px;
   margin: 0 auto 2.5rem auto;
+  font-weight: 400;
 }
 
 .button-group {
@@ -157,12 +170,13 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
 
 /* --- BUTTONS --- */
 .btn {
-  padding: 1rem 2rem;
-  border-radius: 6px;
+  padding: 1rem 2.2rem;
+  border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
   font-size: 1rem;
   transition: all 0.3s ease;
+  letter-spacing: -0.2px;
 }
 
 .btn-primary {
@@ -171,18 +185,20 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
 }
 
 .btn-primary:hover {
-  background: #2a8ee6;
+  background: #fff; /* Switching to white on hover feels very premium */
   transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.2);
 }
 
 .btn-secondary {
-  background: transparent;
+  background: rgba(255,255,255,0.03);
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .btn-secondary:hover {
-  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
 }
 
 /* --- FLOATING WHATSAPP CTA --- */
@@ -190,7 +206,7 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color: #25D366; /* Official WA green */
+  background-color: #25D366; 
   color: white;
   width: 60px;
   height: 60px;
@@ -199,61 +215,59 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   justify-content: center;
   align-items: center;
   z-index: 999;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
   transition: transform 0.3s ease;
-  animation: float-pulse 2s infinite;
 }
 
-.floating-wa:hover { transform: scale(1.1); animation: none; }
-
-@keyframes float-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
+.floating-wa:hover { transform: scale(1.1) translateY(-5px); }
 
 /* --- TYPOGRAPHY & SECTIONS --- */
 .section-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 3rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -1px;
   text-align: left;
 }
 
 /* --- SERVICES GRID --- */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
 .service-item {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+  padding: 2.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
-.service-item:hover { background: rgba(255, 255, 255, 0.05); }
+.service-item:hover { 
+  background: rgba(255, 255, 255, 0.04); 
+  border-color: rgba(79, 172, 254, 0.3);
+  transform: translateY(-5px);
+}
 
-.service-item h3 { font-size: 1.2rem; color: #4facfe; margin-bottom: 0.5rem; }
-.service-item p { color: #a0a0a0; font-size: 0.95rem; }
+.service-item h3 { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: -0.5px; }
+.service-item p { color: #a0aab8; font-size: 1rem; }
 
 /* --- ABOUT SECTION --- */
 .about-box {
   background: rgba(255, 255, 255, 0.02);
   border-left: 4px solid #4facfe;
-  padding: 2rem;
-  border-radius: 0 8px 8px 0;
+  padding: 2.5rem;
+  border-radius: 0 12px 12px 0;
   max-width: 800px;
 }
-.about-box p { font-size: 1.1rem; color: #e0e0e0; }
+.about-box p { font-size: 1.15rem; color: #e0e6ed; line-height: 1.8; }
 
 /* --- WHY US GRID --- */
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -262,17 +276,21 @@ section { min-height: 100vh; display: flex; flex-direction: column; justify-cont
   align-items: center;
   gap: 1rem;
   background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
-.check { color: #4facfe; font-weight: bold; font-size: 1.2rem; }
+.why-item p { font-weight: 500; font-size: 1.05rem; }
+.check { color: #4facfe; font-weight: 800; font-size: 1.2rem; }
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-  .hero-title { font-size: 2.5rem; }
-  section { padding: 5rem 5%; }
+  .hero-title { font-size: 2.8rem; letter-spacing: -1px; }
+  .section-title { font-size: 2.2rem; }
+  section { padding: 6rem 5%; }
   .button-group { flex-direction: column; width: 100%; }
   .btn { width: 100%; text-align: center; }
-  .floating-wa { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+  .floating-wa { bottom: 20px; right: 20px; width: 55px; height: 55px; }
+  .logo-text { font-size: 1.2rem; }
 }
