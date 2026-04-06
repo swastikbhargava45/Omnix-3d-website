@@ -20,8 +20,10 @@ export default function App() {
 
   return (
     <>
-      {/* Background Image & Overlay */}
-      <div className="bg-image-container"></div>
+      {/* Background Video & Overlay */}
+      <video autoPlay loop muted playsInline className="hero-video">
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
       <div className="bg-overlay"></div>
 
       {/* Floating WhatsApp CTA */}
